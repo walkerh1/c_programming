@@ -1,3 +1,5 @@
+// parse \t in this file as 8 columns wide
+
 hello
 	world
 		this

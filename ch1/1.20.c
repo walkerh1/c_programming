@@ -5,16 +5,18 @@
 // 3 columns into the current tab block when it hits a \t, then it should
 // replace that \t with 8 - 3 = 5 spaces, not 8.
 
-#define TAB_SIZE 8 // a tab is 8 columns wide
+// To test: a.out < 1.20.in.txt > 1.20.out.txt
+
+#define TABSIZE 8 // assume a tab is 8 columns wide
 #define MAXLINE 1000
 
-int get_line_detab(char line[], int maxline);
+int get_line_detab(char line[], int max_line, int tab_size);
 
 int main(void) {
     int len;
     char line[MAXLINE];
 
-    while ((len = get_line_detab(line, MAXLINE)) > 0) {
+    while ((len = get_line_detab(line, MAXLINE, TABSIZE)) > 0) {
         if (len > 0) {
             printf("%s", line);
         }
@@ -23,13 +25,13 @@ int main(void) {
     return 0;
 }
 
-int get_line_detab(char s[], int lim) {
+int get_line_detab(char s[], int lim, int tab_size) {
     int c, i;
 
     i = 0;
     while (i < lim-1 && (c=getchar())!=EOF && c!='\n') {
         if (c == '\t') {
-            int spaces = TAB_SIZE - (i % TAB_SIZE);
+            int spaces = tab_size - (i % tab_size); // computes remaining columns till next tab block
             for (int j = 0; j < spaces; j++) {
                s[i] = ' '; 
                i++;
