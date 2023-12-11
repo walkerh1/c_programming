@@ -4,6 +4,8 @@
 // unless it is only one space away from the tab break, in which
 // case leave it as a space.
 
+// To test: a.out < 1.21.in.txt > 1.21.out.txt
+
 #define TABSIZE 8 // assume a tab is 8 columns wide
 #define MAXLINE 1000
 
