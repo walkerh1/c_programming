@@ -31,7 +31,7 @@ int get_line_detab(char s[], int lim, int tab_size) {
     i = 0;
     while (i < lim-1 && (c=getchar())!=EOF && c!='\n') {
         if (c == '\t') {
-            int spaces = tab_size - (i % tab_size); // computes remaining columns till next tab block
+            int spaces = tab_size - (i % tab_size);
             for (int j = 0; j < spaces; j++) {
                s[i] = ' '; 
                i++;

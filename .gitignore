@@ -54,3 +54,7 @@ dkms.conf
 # Text files
 *.out.txt
 out.txt
+
+# IDE config files
+.idea
+.vscode
