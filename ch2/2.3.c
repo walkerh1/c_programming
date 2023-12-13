@@ -3,10 +3,10 @@
 int htoi(const char s[]);
 
 int main(void) {
-    char n1[] = { '0', 'x', 'c', '3', '\0' };
-    char n2[] = { '0', 'x', '1', '4', '\0'};
-    char n3[] = { 'c', '3', 'e', '9', '0', '\0' };
-    char n4[] = { 'c', '3', 'E', '9', '0', '\0' };
+    char n1[] = "0xc3";
+    char n2[] = "0x14";
+    char n3[] = "c3d90";
+    char n4[] = "c3E90";
 
     printf("'%s' -> %d\n", n1, htoi(n1));
     printf("'%s' -> %d\n", n2, htoi(n2));

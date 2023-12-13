@@ -3,8 +3,8 @@
 void squeeze(char s1[], const char s2[]);
 
 int main(void) {
-    char s1[] = { 'a', 'b', 'c', 'd', 'x', 'd', 'd', '\0' };
-    char s2[] = { 'd', 'a', '\0' };
+    char s1[] = "abcdxdd";
+    char s2[] = "da";
 
     printf("%s\n", s1);
     squeeze(s1, s2);
