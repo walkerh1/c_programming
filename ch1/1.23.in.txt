@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+char s[] = "this is a /* string literal */ with a comment inside it";
+/* this is a comment */
+/*
+ * this is a multiline
+ * comment
+ */
+int main(void) {
+    int c, prev; // this is an inline comment
+
+    while ((c = getchar()) != EOF) {
+        if (c == '"') { /* this is another kind of inline comment */
+            putchar(c);
+            while ((c = getchar()) != EOF && c != '"') {
+                putchar(c);
+            }
+            putchar(c);
+        } else if (c == '\'') {
+            putchar(c);
+            while((c = getchar()) != EOF && c != '\'') {
+                putchar(c);
+            }
+            putchar(c);
+        } else if (c == '/') {
+            prev = c;
+            if ((c = getchar()) == '*') {
+                while ((c = getchar()) != EOF) {
+                    if (c == '*') {
+                        if ((c = getchar()) == '/') {
+                            break;
+                        }
+                    }
+                }
+            } else {
+                putchar(prev);
+                putchar(c);
+            }
+        } else {
+            putchar(c);
+        }
+    }
+}
+
+// comment on last line
