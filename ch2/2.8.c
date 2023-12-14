@@ -25,11 +25,11 @@ int main(void) {
 
 // return x rotated to the right by n bit positions.
 unsigned right_rot(unsigned x, int n) {
-    // shift last n bits of x left to the most significant positions
-    // and shift x right n bits to move rest of the bits into less
+    // shift last n bits of x left to the most significant positions,
+    // then shift x right n bits to move rest of the bits into less
     // significant positions, then bitwise-or the results. Note we are
-    // relying on right shift always pushing 0s onto the left of the
-    // sequence, which is always true for signed ints.
+    // relying on right shift filling vacated bits with 0, which is
+    // always true for unsigned ints.
     return (x << (UNSIGNED_NUM_BITS-n)) | (x >> n);
 }
 
