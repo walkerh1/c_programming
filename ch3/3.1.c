@@ -37,6 +37,8 @@ int main(void) {
 
     int list_test[] = {1,2,4,5,6,8,10};
     printf("%d\n", bin_search_modified(1, list_test, 7));
+
+    return 0;
 }
 
 

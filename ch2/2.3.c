@@ -12,6 +12,8 @@ int main(void) {
     printf("'%s' -> %d\n", n2, htoi(n2));
     printf("'%s' -> %d\n", n3, htoi(n3));
     printf("'%s' -> %d\n", n4, htoi(n4));
+
+    return 0;
 }
 
 // converts ascii string rep of hex number into a signed int

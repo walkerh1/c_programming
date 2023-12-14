@@ -7,6 +7,8 @@ int main(void) {
     char s2[] = "gb";
 
     printf("%d\n", any(s1, s2));
+
+    return 0;
 }
 
 int any(const char s1[], const char s2[]) {

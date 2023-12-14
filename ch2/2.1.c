@@ -16,5 +16,6 @@ int main(void) {
     printf("float:\t\t\t\t%lu bytes\n", sizeof(float));
     printf("double:\t\t\t\t%lu bytes\n", sizeof(double));
     printf("long double:\t\t%lu bytes\n", sizeof(long double));
+
     return 0;
 }

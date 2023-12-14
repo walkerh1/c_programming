@@ -18,6 +18,8 @@ int main(void) {
     printf("after: %s\n", escaped);
     unescape(escaped, unescaped);
     printf("back to before: %s\n", unescaped);
+
+    return 0;
 }
 
 // parses escape sequences as two printable chars; e.g. '\t' --> '\\' and 't'

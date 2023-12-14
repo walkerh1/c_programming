@@ -11,6 +11,8 @@ int main(void) {
     putchar(lower('Z'));
     putchar(lower('?'));
     putchar(lower('3'));
+
+    return 0;
 }
 
 int lower(int c) {

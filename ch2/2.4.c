@@ -9,6 +9,8 @@ int main(void) {
     printf("%s\n", s1);
     squeeze(s1, s2);
     printf("%s\n", s1);
+
+    return 0;
 }
 
 void squeeze(char s1[], const char s2[]) {
