@@ -11,7 +11,7 @@ int main(void) {
     char escaped[MAXCHAR];
     char unescaped[MAXCHAR];
 
-    char s[] = "hello\tworld\n\r\?\'\"";
+    char s[] = "hello\tworld\n\r\?\'\"?";
 
     printf("before: %s\n", s);
     escape(s, escaped);

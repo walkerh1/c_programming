@@ -3,10 +3,10 @@
 int htoi(const char s[]);
 
 int main(void) {
-    char n1[] = "0xc3";
-    char n2[] = "0x14";
-    char n3[] = "c3d90";
-    char n4[] = "c3E90";
+    char n1[] = "0xc3";     // 195
+    char n2[] = "0x14";     // 20
+    char n3[] = "c3d90";    // 802192
+    char n4[] = "c3E90f";   // 12839183
 
     printf("'%s' -> %d\n", n1, htoi(n1));
     printf("'%s' -> %d\n", n2, htoi(n2));
@@ -28,9 +28,9 @@ int htoi(const char s[]) {
    while (s[i] != '\0') {
        if (s[i] >= '0' && s[i] <= '9') {
            num = s[i] - '0';
-       } else if (s[i] >= 'a' && s[i] <= 'e') {
+       } else if (s[i] >= 'a' && s[i] <= 'f') {
            num = 10 + s[i] - 'a';
-       } else if (s[i] >= 'A' && s[i] <= 'E') {
+       } else if (s[i] >= 'A' && s[i] <= 'F') {
            num = 10 + s[i] - 'A';
        }
        result = result * 16 + num;
