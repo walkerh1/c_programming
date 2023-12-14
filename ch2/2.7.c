@@ -23,8 +23,7 @@ int main(void) {
     return 0;
 }
 
-// sets the n bits starting from position p in x (going right)
-// to the bits in the same position in y.
+// return x with the n bits starting at position p flipped
 // precondition: sizeof(unsigned) >= p >= n >= 0
 unsigned invert(unsigned x, int p, int n) {
     // E.g. if p=4 and n=3 then mask will be: 0b1...11100011,
