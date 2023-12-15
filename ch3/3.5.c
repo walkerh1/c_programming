@@ -28,6 +28,7 @@ int main(void) {
     return 0;
 }
 
+// precondition: 2 <= base <= 16
 void itob(int n, char s[], int base) {
     int i, rem, sign;
 
