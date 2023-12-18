@@ -41,6 +41,8 @@ int get_line(char line[], int max) {
 int str_rindex(char s[], char t[]) {
     int i, j, k;
 
+    // start at rightmost len(t) window of s, and slide it left,
+    // checking for matches on each shift
     for (i = strlen(s) - strlen(t); i >= 0; i--) {
         for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
             ;

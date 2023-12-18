@@ -5,7 +5,7 @@
 
 void itoa(int n, char s[]);
 void reverse(char s[]);
-unsigned abs(int n);
+int abs(int n);
 
 int main(void) {
     char num[MAXLEN];
@@ -21,9 +21,9 @@ int main(void) {
 // trying to negate -2^31 won't result in 2^31, as might be expected, since 2^31 is out of range for
 // the signed int type. What ends up happening in twos complement is -(-2^31) overflows back to itself.
 // this means n will still equal -2^31 by the time it reaches the do-while loop. And since it's a
-// do-while the loop gets executed once. This means '(' gets pushed onto the string buffer, as n % 10
-// evaluates to -8 and -8 + '0' evaluates to '(' in ascii. After this the loop condition fails, as
-// n/10 is negative, and in the end the function returns with "-(" in the string buffer.
+// do-while the body gets executed once without checking. This means '(' gets pushed onto the string
+// buffer, as n % 10 evaluates to -8 and -8 + '0' evaluates to '(' in ascii. After this the loop
+// condition fails, as n/10 is negative, and in the end the function returns with "-(" in the string buffer.
 //
 // To get around this, the while condition is changed to (n /= 10) != 0, allowing us to iterate over
 // negative values of n, and the loop body is changed to use the absolute value of n % 10, which prevents
@@ -37,7 +37,7 @@ void itoa(int n, char s[]) {
 
     i = 0;
     do {
-        s[i++] = abs(n % 10) + '0';
+        s[i++] = (char)(abs(n % 10) + '0');
     } while ((n /= 10) != 0);
 
     if (sign < 0) {
@@ -52,13 +52,14 @@ void itoa(int n, char s[]) {
 void reverse(char s[]) {
     int i, j;
     char tmp;
-    for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
         tmp = s[i];
         s[i] = s[j];
         s[j] = tmp;
     }
 }
 
-unsigned abs(int n) {
+// precondition: 0 <= n <= 9
+int abs(int n) {
     return n < 0 ? -n : n;
 }

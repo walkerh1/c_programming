@@ -5,7 +5,7 @@
 
 void itoa(int n, char s[], int width);
 void reverse(char s[]);
-unsigned abs(int n);
+int abs(int n);
 
 int main(void) {
     char num[MAXLEN];
@@ -24,7 +24,7 @@ void itoa(int n, char s[], int width) {
 
     i = 0;
     do {
-        s[i++] = abs(n % 10) + '0';
+        s[i++] = (char)(abs(n % 10) + '0');
     } while ((n /= 10) != 0);
 
     if (sign < 0) {
@@ -43,13 +43,16 @@ void itoa(int n, char s[], int width) {
 void reverse(char s[]) {
     int i, j;
     char tmp;
-    for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
         tmp = s[i];
         s[i] = s[j];
         s[j] = tmp;
     }
 }
 
-unsigned abs(int n) {
+// precondition: 0 <= n <= 9
+// This is because in the only place this function is called, it is
+// passed an argument of the form n == x % 10.
+int abs(int n) {
     return n < 0 ? -n : n;
 }

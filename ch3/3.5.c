@@ -5,7 +5,7 @@
 
 void itob(int n, char s[], int base);
 void reverse(char s[]);
-unsigned abs(int n);
+int abs(int n);
 
 int main(void) {
     char num[MAXLEN];
@@ -30,7 +30,7 @@ int main(void) {
 
 // precondition: 2 <= base <= 16
 void itob(int n, char s[], int base) {
-    int i, rem, sign;
+    int i, sign, rem;
 
     if ((sign = n) < 0) {
         n = -n;
@@ -39,7 +39,7 @@ void itob(int n, char s[], int base) {
     i = 0;
     do {
         rem = abs(n % base);
-        s[i++] = rem < 10 ? rem + '0' : rem - 10 + 'A';
+        s[i++] = (char)(rem < 10 ? rem + '0' : rem + 'A');
     } while ((n /= base) != 0);
 
     if (sign < 0) {
@@ -54,13 +54,16 @@ void itob(int n, char s[], int base) {
 void reverse(char s[]) {
     int i, j;
     char tmp;
-    for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
         tmp = s[i];
         s[i] = s[j];
         s[j] = tmp;
     }
 }
 
-unsigned abs(int n) {
+// precondition: 0 <= n <= 15
+// This is because in the only place this function is called, it is
+// passed an argument of the form n == x % base, and base is at most 16.
+int abs(int n) {
     return n < 0 ? -n : n;
 }

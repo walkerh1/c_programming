@@ -80,7 +80,7 @@ double atof(char s[]) {
     return sign * val / power;
 }
 
-// get line into s, return length
+// get next line into s, return length
 int get_line(char line[], int max) {
     int c, i;
 
