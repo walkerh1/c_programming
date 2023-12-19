@@ -5,6 +5,7 @@
 int get_line(char line[], int maxline);
 void reverse(char line[], int len);
 
+// process one line at a time
 int main(void) {
     int len; // current line length
     char line[MAXLINE]; // current input line

@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// replace tabs, backspaces and slashes with their explicit escape sequences
+
 int main(void) {
     int c;
 
@@ -9,4 +11,6 @@ int main(void) {
         else if (c == '\\') printf("\\\\");
         else putchar(c);
     }
+
+    return 0;
 }

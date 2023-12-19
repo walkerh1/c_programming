@@ -25,6 +25,7 @@ int main(void) {
     return 0;
 }
 
+// get line and replace any tabs with appropriate number of spaces
 int get_line_detab(char s[], int lim, int tab_size) {
     int c, i;
 

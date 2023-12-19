@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+// Checks C program is balanced with respect to '[', '(', '{', ''', '"', and "/*",
+// ignoring things inside double quotes and comments.
+
 #define MAXSTACK 100
 
 bool input_is_balanced();

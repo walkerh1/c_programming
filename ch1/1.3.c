@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// print Farenheit-Celsius table; floating-point version
+// print fahrenheit-to-celsius conversion table with a heading
 
 int main(void) {
     float fahr, celsius;
@@ -17,4 +17,6 @@ int main(void) {
         printf("%4.0f %6.1f\n", fahr, celsius);
         fahr = fahr + step;
     }
+
+    return 0;
 }

@@ -4,6 +4,10 @@
 #define TABWIDTH 8      // number of columns in a tab block
 #define WORDWRAP 8      // if most recent blank is more than WORDWRAP from end of line, split word with '-'
 
+// Fold lines longer than MAXCOLUMN chars long into the next line by
+// putting the most recent word at the start of the next line. If the word is
+// longer than TABWIDTH, than split the word with '-' instead.
+
 int update_line(char line[], int pos);
 int find_last_blank(const char line[], int n);
 void print_up_to(char line[], int pos);

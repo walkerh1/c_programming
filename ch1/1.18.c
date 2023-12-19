@@ -5,6 +5,7 @@
 int get_line(char line[], int maxline);
 int r_strip(char line[], int len);
 
+// process input one line at a time
 int main(void) {
     int len; // current line length
     char line[MAXLINE]; // current input line

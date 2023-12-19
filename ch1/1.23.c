@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// Removes all block and inline C comments.
+
 int main(void) {
     int c, prev;
 

@@ -24,6 +24,7 @@ int main(void) {
     return 0;
 }
 
+// replace adjacent blocks of spaces with a tab
 int get_line_entab(char s[], int lim, int tab_size) {
     int c, i, j, num_spaces;
     i = num_spaces = 0;

@@ -2,6 +2,8 @@
 
 #define ASCII 128
 
+// prints a histogram (horizontal and vertical) of frequencies of different chars in input
+
 int main(void) {
     int char_freqs[ASCII];
 

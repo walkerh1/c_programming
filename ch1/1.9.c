@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+// replace each string of one or more blanks in the input with
+// a single blank in the output
+
 int main(void) {
     int c;
     
@@ -10,4 +13,6 @@ int main(void) {
             putchar(c);
         }
     }
+
+    return 0;
 }

@@ -2,6 +2,8 @@
 
 #define MAX_WORD_LEN 50
 
+// prints a histogram (horizontal and vertical) of the lengths of words in the input
+
 int main(void) {
     int word_lens[MAX_WORD_LEN];
 

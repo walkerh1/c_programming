@@ -5,6 +5,7 @@
 
 int get_line(char line[], int maxline);
 
+// print all line longer than 80 chars
 int main(void) {
     int len; // current line length
     char line[MAXLINE]; // current input line

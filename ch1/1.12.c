@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// print one word of input per line
+
 int main(void) {
     int c;
 
@@ -10,4 +12,6 @@ int main(void) {
         }
         putchar(c);
     }
+
+    return 0;
 }

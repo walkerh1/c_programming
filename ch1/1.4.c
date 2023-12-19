@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// print a celsius-to-fahrenheit conversion table
+
 int main(void) {
     float fahr, celsius;
     int lower, upper, step;
@@ -15,4 +17,6 @@ int main(void) {
         printf("%4.0f %6.1f\n", celsius, fahr);
         celsius += step;
     }
+
+    return 0;
 }

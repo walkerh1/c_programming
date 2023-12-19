@@ -1,8 +1,9 @@
 #include <stdio.h>
 
-// test with multiple whitespace chars between adjacent words
-// test no words
-// test one word, no whitespace
+// counts number of lines, words and chars in input. Edge cases to test:
+// multiple whitespace chars between adjacent words
+// no words
+// one word, no whitespace
 
 #define IN 1
 #define OUT 0
@@ -23,4 +24,6 @@ int main(void) {
     }
 
     printf("%d %d %d\n", nl, nw, nc);
+
+    return 0;
 }
