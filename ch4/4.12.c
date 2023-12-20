@@ -25,10 +25,10 @@ void itoa(int n, char s[]) {
         return;
     }
 
-    // recursive case
+    // recurse
     itoa(n/10, s);
 
-    // update s post-induction to get the right order
+    // update s post-recursion to get the right order
     s[i] = n % 10 + '0';
     s[++i] = '\0';
 }
