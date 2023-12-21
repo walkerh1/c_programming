@@ -1,0 +1,20 @@
+hello
+C programmers
+this
+line
+is
+unsorted
+as
+I
+write
+it
+but
+will
+be
+sorted
+by
+the
+time
+you
+read
+it
