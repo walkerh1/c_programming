@@ -16,6 +16,7 @@ int main(void) {
     return 0;
 }
 
+// concatenate ct to the end of s; return s
 char *str_cat(char *s, const char *ct) {
     char *dest = s + strlen(s);
     while ((*dest++ = *ct++))

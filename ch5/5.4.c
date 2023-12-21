@@ -13,7 +13,7 @@ int main(void) {
 
     return 0;
 }
-
+o// return 1 if t matches end of s, otherwise 0
 int strend(char *s, char *t) {
     int dist = strlen(s) - strlen(t);
 
