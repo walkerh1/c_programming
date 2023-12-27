@@ -11,11 +11,13 @@ int readlines(char *lineptr[], int maxline);
 void writelines(char *lineptr[], int maxline);
 void quicksort(void *v[], int left, int right, int (*comp)(void *, void *), int reverse);
 int numcmp(const char *s1, const char *s2);
+int ignorecasecmp(const char *s1, const char *s2);
 
 int main(int argc, char *argv[]) {
     int nlines;
-    int numeric = 0, reverse = 0;
+    int numeric = 0, reverse = 0, fold = 0;
     char c;
+    int (*comp)(const char *s1, const char *s2);
 
     while (--argc > 0 && (*++argv)[0] == '-') {
         while ((c = *++argv[0])) {
@@ -25,6 +27,9 @@ int main(int argc, char *argv[]) {
                     break;
                 case 'r':
                     reverse = 1;
+                    break;
+                case 'f':
+                    fold = 1;
                     break;
                 default:
                     printf("Illegal option: %c\n", c);
@@ -40,7 +45,8 @@ int main(int argc, char *argv[]) {
     }
 
     if ((nlines = readlines(lineptr, MAXLINE)) >= 0) {
-        quicksort((void **) lineptr, 0, nlines - 1, (int (*)(void *, void *)) (numeric ? numcmp : strcmp), reverse);
+        comp = numeric ? numcmp : fold ? ignorecasecmp : strcmp;
+        quicksort((void **) lineptr, 0, nlines - 1, (int (*)(void *, void *)) comp, reverse);
         writelines(lineptr, nlines);
         return 0;
     } else {
@@ -49,7 +55,7 @@ int main(int argc, char *argv[]) {
     }
 }
 
-void quicksort(void *v[], int left, int right, int (*comp) (void *, void *), int reverse) {
+void quicksort(void *v[], int left, int right, int (*comp) (void *, void *), int r) {
     int i, last;
     void swap(void *v[], int, int);
 
@@ -57,16 +63,18 @@ void quicksort(void *v[], int left, int right, int (*comp) (void *, void *), int
         return;
     }
 
+    int reverse = r ? -1 : 1;
+
     swap(v, left, (left + right)/2);
     last = left;
     for (i = left+1; i <= right; i++) {
-        if (reverse ? (*comp)(v[i], v[left]) > 0 : (*comp)(v[i], v[left]) < 0) {
+        if ((*comp)(v[i], v[left]) * reverse < 0) {
             swap(v, ++last, i);
         }
     }
     swap(v, left, last);
-    quicksort(v, left, last-1, comp, reverse);
-    quicksort(v, last+1, right, comp, reverse);
+    quicksort(v, left, last-1, comp, r);
+    quicksort(v, last+1, right, comp, r);
 }
 
 int numcmp(const char *s1, const char *s2) {
@@ -82,6 +90,23 @@ int numcmp(const char *s1, const char *s2) {
     } else {
         return 0;
     }
+}
+
+int ignorecasecmp(const char *s1, const char *s2) {
+    int i = 0;
+    char x, y;
+    int diff = 'a' - 'A';
+    while (s1[i] != '\0' && s2[i] != '\0') {
+        x = (s1[i] >= 'A' && s1[i] <= 'Z') ? s1[i] + diff : s1[i];
+        y = (s2[i] >= 'A' && s2[i] <= 'Z') ? s2[i] + diff : s2[i];
+        if (x < y) {
+            return -1;
+        } else if (x > y) {
+            return 1;
+        }
+        i++;
+    }
+    return 0;
 }
 
 void swap(void *v[], int i, int j) {
