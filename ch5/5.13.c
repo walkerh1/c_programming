@@ -14,8 +14,8 @@ int get_line(char *s, int lim);
 // Instead, it allocates a 1D block of memory that is big enough to store n lines of
 // MAXLINE bytes each, and uses pointer arithmetic to navigate the block as if it were a
 // 2D array. There is some memory wasted when lines are less than MAXLINE long. But the
-// alternative would be to malloc each line that's read, which would incur a huge time cost
-// as the number of input lines increases.
+// alternative would be to malloc each line that's read, which would incur a significant time
+// cost as the number of input lines increases.
 int main(int argc, char *argv[]) {
     int n, len;
     char *buf_start, *head, *tail;
@@ -73,12 +73,12 @@ int main(int argc, char *argv[]) {
             p += MAXLINE;
         }
     }
-    printf("%s", p);
+    printf("%s\n", p);
 
     return 0;
 }
 
-// get next line of input; returns last read in char (useful to detect EOF)
+// get next line of input; returns last read char (useful to detect EOF)
 int get_line(char *s, int lim) {
     int c, i;
     for (i=0; i<lim-1 && (c = getchar()) != EOF && c!='\n'; i++) {
