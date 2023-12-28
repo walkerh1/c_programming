@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define MAXLINE 1000    // max number of input lines read
 #define MAXLEN 1000     // max length of a line
@@ -9,15 +10,17 @@ char *lineptr[MAXLINE]; // pointers to the text lines
 
 int readlines(char *lineptr[], int maxline);
 void writelines(char *lineptr[], int maxline);
-void quicksort(void *v[], int left, int right, int (*comp)(void *, void *), int reverse);
+void quicksort(void *v[], int left, int right, int (*comp)(void *, void *));
 int numcmp(const char *s1, const char *s2);
-int ignorecasecmp(const char *s1, const char *s2);
+int charcmp(const char *s1, const char *s2);
+
+int numeric = 0;    // numeric sort
+int reverse = 0;    // decreasing order
+int fold = 0;       // fold: ignore case
 
 int main(int argc, char *argv[]) {
     int nlines;
-    int numeric = 0, reverse = 0, fold = 0;
     char c;
-    int (*comp)(const char *s1, const char *s2);
 
     while (--argc > 0 && (*++argv)[0] == '-') {
         while ((c = *++argv[0])) {
@@ -40,13 +43,12 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc != 0) {
-        printf("Usage: sort -[nr]\n");
+        printf("Usage: sort -[fnr]\n");
         return 1;
     }
 
     if ((nlines = readlines(lineptr, MAXLINE)) >= 0) {
-        comp = numeric ? numcmp : fold ? ignorecasecmp : strcmp;
-        quicksort((void **) lineptr, 0, nlines - 1, (int (*)(void *, void *)) comp, reverse);
+        quicksort((void **) lineptr, 0, nlines - 1, (int (*)(void *, void *)) (numeric ? numcmp : charcmp));
         writelines(lineptr, nlines);
         return 0;
     } else {
@@ -55,7 +57,8 @@ int main(int argc, char *argv[]) {
     }
 }
 
-void quicksort(void *v[], int left, int right, int (*comp) (void *, void *), int r) {
+// quicksort algorithm that can reverse order
+void quicksort(void *v[], int left, int right, int (*comp) (void *, void *)) {
     int i, last;
     void swap(void *v[], int, int);
 
@@ -63,20 +66,21 @@ void quicksort(void *v[], int left, int right, int (*comp) (void *, void *), int
         return;
     }
 
-    int reverse = r ? -1 : 1;
+    int rev = reverse ? -1 : 1;
 
     swap(v, left, (left + right)/2);
     last = left;
     for (i = left+1; i <= right; i++) {
-        if ((*comp)(v[i], v[left]) * reverse < 0) {
+        if ((*comp)(v[i], v[left]) * rev < 0) {
             swap(v, ++last, i);
         }
     }
     swap(v, left, last);
-    quicksort(v, left, last-1, comp, r);
-    quicksort(v, last+1, right, comp, r);
+    quicksort(v, left, last-1, comp);
+    quicksort(v, last+1, right, comp);
 }
 
+// custom number comparator
 int numcmp(const char *s1, const char *s2) {
     double v1, v2;
 
@@ -92,13 +96,15 @@ int numcmp(const char *s1, const char *s2) {
     }
 }
 
-int ignorecasecmp(const char *s1, const char *s2) {
-    int i = 0;
+// custom char comparator that depends on options passed to command line
+int charcmp(const char *s1, const char *s2) {
+    int i;
     char x, y;
-    int diff = 'a' - 'A';
+
+    i = 0;
     while (s1[i] != '\0' && s2[i] != '\0') {
-        x = (s1[i] >= 'A' && s1[i] <= 'Z') ? s1[i] + diff : s1[i];
-        y = (s2[i] >= 'A' && s2[i] <= 'Z') ? s2[i] + diff : s2[i];
+        x =  fold ? tolower(s1[i]) : s1[i];
+        y =  fold ? tolower(s2[i]) : s2[i];
         if (x < y) {
             return -1;
         } else if (x > y) {

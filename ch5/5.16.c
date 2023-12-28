@@ -22,7 +22,6 @@ int dir = 0;        // directory order: only sort on alphabet, number and blank 
 int main(int argc, char *argv[]) {
     int nlines;
     char c;
-    int (*comp)(const char *s1, const char *s2);
 
     while (--argc > 0 && (*++argv)[0] == '-') {
         while ((c = *++argv[0])) {
