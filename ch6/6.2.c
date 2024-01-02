@@ -80,7 +80,7 @@ int main(void) {
     return 0;
 }
 
-// add or increment a node with word at or below root
+// add or increment a node with word[:len] at or below root
 struct tnode *addtree(struct tnode *root, char *word, int len) {
     int cond;
 
