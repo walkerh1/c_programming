@@ -52,7 +52,6 @@ unsigned hash(char *s) {
 struct nlist *lookup(char *s) {
     struct nlist *np;
     for (np = hashtable[hash(s)]; np != NULL; np = np->next) {
-        printf("here\n");
         if (strcmp(s, np->name) == 0) {
             return np;
         }
