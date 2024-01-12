@@ -1,44 +1,13 @@
 #include <fcntl.h>
-
-#define NULL 0
-#define EOF (-1)
-#define BUFSIZ 1024
-#define OPEN_MAX 20
-
-typedef struct _iobuf {
-    int cnt;            // characters left
-    char *ptr;          // next character position
-    char *base;         // location of buffer
-    struct {
-        unsigned is_read  : 1;    // file open for reading
-        unsigned is_write : 1;    // file open for writing
-        unsigned is_unbuf : 1;    // file is unbuffered
-        unsigned is_eof   : 1;    // EOF has occurred on this file
-        unsigned is_err   : 1;    // error occurred on this file
-    } flags;
-    int fd;             // file descriptor
-} FILE;
-
-FILE _iob[OPEN_MAX];
-
-#define stdin   (&_iob[0])
-#define stdout  (&_iob[1])
-#define stderr  (&_iob[2])
-
-int _fillbuf(FILE *);
-int _flushbuf(int, FILE *);
-
-#define feof(p)     ((p)->flags.is_eof != 0)
-#define ferror(p)   ((p)->flags.is_err != 0)
-#define fileno(p)   ((p)->fd)
-
-#define getc(p)     (--(p)->cnt >= 0 ? (unsigned char) *(p)->ptr++ : _fillbuf(p))
-#define putc(x, p)  (--(p)->cnt >= 0 ? *(p)->ptr++ = x : _flushbuf((x),p))
-
-#define getchar()   getc(stdin)
-#define putchar(x)  putc((x), stdout)
+#include "syscalls.h"
 
 #define PERMS 0666
+
+FILE _iob[OPEN_MAX] = {
+        { 0, (char *) 0, (char *) 0, { 1, 0, 0, 0, 0 }, 0 },    // stdin
+        { 0, (char *) 0, (char *) 0, { 0, 1, 0, 0, 0 }, 1 },    // stdout
+        { 0, (char *) 0, (char *) 0, { 0, 1, 1, 0, 0 }, 2 },    // stderr
+};
 
 void *malloc(size_t);
 off_t lseek(int, off_t, int);
@@ -123,11 +92,12 @@ int _fillbuf(FILE *fp) {
     return (unsigned char) *fp->ptr++;
 }
 
+// test code
 int main(void) {
     FILE *fp;
     char c;
 
-    if ((fp = fileopen("8.2.c", "r")) == NULL) {
+    if ((fp = fileopen("fileopen.c", "r")) == NULL) {
         write(1, "error: couldn't open file\n", 26);
         return 1;
     }
