@@ -156,6 +156,19 @@ int fileclose(FILE *fp) {
     return c;
 }
 
+// fseek: seek position in file
+int fseek(FILE *fp, long offset, int origin) {
+    if ((fp->flag & _UNBUF) == 0) {
+        if (fp->flag & _READ) {
+            fp->cnt = 0;
+            fp->ptr = fp->base;
+        } else if (fp->flag & _WRITE) {
+            fflush(fp);
+        }
+    }
+    return (lseek(fp->fd, offset, origin) < 0);
+}
+
 // test code
 int main(void) {
     FILE *fp;
