@@ -11,7 +11,7 @@ int except = 0, number = 0, found = 0;
 // find: print lines that match pattern
 int main(int argc, char *argv[]) {
     FILE *fp;
-    char line[MAXLINE], *pattern, *prog;
+    char *pattern, *prog;
     int c;
 
     prog = *argv;   // program name
