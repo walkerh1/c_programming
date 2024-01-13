@@ -119,3 +119,10 @@ void *mcalloc(unsigned n, unsigned size) {
     }
     return p;
 }
+
+void bfree(void *p, unsigned n) {
+    Header *bp;
+    bp = (Header *)p;
+    bp->s.size = n / sizeof(Header);
+    mfree((void *)(bp+1));
+}
