@@ -1,11 +1,7 @@
-/*
- * block comment with #define %in %it
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <assert.h>
 
 #define HASHSIZE 101
 #define MAXWORD 100
@@ -28,6 +24,7 @@ struct nlist {
     char *defn;         // replacement text
 };
 
+// preprocess '#define's
 int main(void) {
     char c, word[MAXWORD], name[MAXWORD], defn[MAXWORD];
     struct nlist *entry;
@@ -64,9 +61,9 @@ int gettoken(char *word, int lim) {
         *w++ = c;
     }
 
-    if (isalnum(c) || c == '_' || c == '#') {   // word can start with letter, _, or #
+    if (isalnum(c) || c == '_' || c == '#') {
         for ( ; --lim > 0; w++) {
-            if (!isalnum(*w = getch()) && *w != '_') {  // non-first character can be letter, number, or _
+            if (!isalnum(*w = getch()) && *w != '_') {
                 ungetch(*w);
                 break;
             }
